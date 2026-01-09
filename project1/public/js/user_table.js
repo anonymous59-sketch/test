@@ -14,8 +14,8 @@ fetch('./usertable')
   return resp.json();
 })
 .then(result => {
+  // console.log(result)
   result.forEach(elem => {
-    // console.log(elem);
     const insertHtml = `
       <tr>
         <td>${elem['USER_NO']}</td>

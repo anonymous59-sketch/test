@@ -9,45 +9,65 @@
 </head>
 
 <body>
-<nav class="nav">
+  <nav class="nav">
     <ul class="menu-left">
-        <li><a href="/index.html">홈</a></li>
-        <li><a href="/board_list.html">게시판</a></li>
-        <li><a href="/user_table.html">회원관리</a></li>
+      <li><a href="/index.html">홈</a></li>
+      <li><a href="/board_list.html">게시판</a></li>
+      <li><a href="/user_table.html">회원관리</a></li>
     </ul>
-
     <ul class="menu-right">
-        <li><a href="/signup.html">회원가입</a></li>
+      <li><a href="/signup.html">회원가입</a></li>
     </ul>
-</nav>
+  </nav>
 
   <div class="board-wrapper">
-    <h1 class="board-title">게시판</h1>
+    <div class="board-header">
+      <h1 class="board-title">게시판</h1>
+      <a class="write-button">글쓰기</a>
+    </div>
+    <!-- 글쓰기 영역 (기본 숨김) -->
+    <div id="writeArea" class="write-area" style="display: none;">
+
+      <h2 class="write-title">글쓰기</h2>
+
+      <div class="write-form">
+
+        <div class="form-group">
+          <label for="writer">작성자</label>
+          <input type="text" id="writer" name="writer" maxlength="10" placeholder="작성자(미입력시 익명)" required>
+        </div>
+
+        <div class="form-group">
+          <label for="postTitle">글 제목</label>
+          <input type="text" id="postTitle" name="postTitle" maxlength="15" placeholder="제목" required>
+        </div>
+
+        <div class="form-group">
+          <label for="postContent">글 내용</label>
+          <textarea id="postContent" name="postContent" maxlength="1000" placeholder="내용을 입력하세요" rows="10"
+            required></textarea>
+        </div>
+
+        <div class="write-buttons">
+          <button type="button" id="submitPostBtn">등록</button>
+          <button type="button" id="cancelPostBtn">취소</button>
+        </div>
+      </div>
+    </div>
+
     <table>
       <thead>
         <tr>
-          <th>게시판 번호</th>
-          <th>게시판 제목</th>
-          <th>게시글 내용</th>
+          <th>글 번호</th>
+          <th>글 제목</th>
+          <th>작성자</th>
           <th>작성일자</th>
         </tr>
       </thead>
-      <tbody id="boardList">
-        <!-- <tr>
-          <td>1</td>
-          <td>첫 번째 게시글</td>
-          <td class="content">게시판 예시 내용입니다.</td>
-          <td>2026-01-09</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>공지사항</td>
-          <td class="content">게시판 공지 내용입니다.</td>
-          <td>2026-01-08</td>
-        </tr> -->
-      </tbody>
+      <tbody id="boardList"></tbody>
     </table>
   </div>
   <script src="/js/board_list.js"></script>
 </body>
+
 </html>

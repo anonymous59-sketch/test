@@ -18,8 +18,11 @@ form.addEventListener('submit', (e) => {
   if(!user_id || !user_pw || !user_name) {
     alert('필수 값 입력');
     return;
+  } else if(user_tel.length > 15) {
+    alert('전화번호를 15자리까지 입력하십시오.')
+    document.querySelector('#phone').focus();
+    return;
   }
-  
   const data = {
     user_id,
     user_pw,
@@ -38,7 +41,7 @@ form.addEventListener('submit', (e) => {
     return data.json();
   })
   .then(result => {
-    console.log(result);
+    window.location.href = 'index.html';
   })
 });
 

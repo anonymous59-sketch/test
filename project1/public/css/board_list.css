@@ -9,6 +9,110 @@
   margin-bottom: 30px;
   font-size: 32px;
 }
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.write-button {
+    padding: 10px 20px;
+    background-color: #2c7be5;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.write-button:hover {
+    background-color: #1a5fb4;
+}
+
+/* 글쓰기 영역 전체 */
+.write-area {
+    margin-bottom: 30px;
+    padding: 25px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fafafa;
+}
+
+/* 글쓰기 제목 */
+.write-title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* 폼 전체 */
+.write-form {
+    width: 100%;
+}
+
+/* 입력 그룹 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* input, textarea 공통 */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* textarea 세부 */
+.form-group textarea {
+    resize: vertical;
+}
+
+/* 버튼 영역 */
+.write-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 등록 버튼 */
+#submitPostBtn {
+    padding: 10px 18px;
+    background-color: #2c7be5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#submitPostBtn:hover {
+    background-color: #1a5fb4;
+}
+
+/* 취소 버튼 */
+#cancelPostBtn {
+    padding: 10px 18px;
+    background-color: #777;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#cancelPostBtn:hover {
+    background-color: #555;
+}
 
 table {
   width: 100%;
