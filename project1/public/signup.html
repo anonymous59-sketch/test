@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+<div class="signup-wrapper">
+    <h1>회원가입</h1>
+
+    <form class="signup-form" id="signupForm" method="POST" action="#">
+        <label for="userId">회원 아이디<span class="require">*</span></label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="password">비밀번호<span class="require">*</span></label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="name">회원 이름<span class="require">*</span></label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">회원 전화번호</label>
+        <input type="tel" id="phone" name="phone" required placeholder="010-1234-5678">
+
+        <button type="submit">회원가입</button>
+    </form>
+</div>
+<script src="/js/signup.js"></script>
+</body>
+</html>

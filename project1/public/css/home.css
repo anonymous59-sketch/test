@@ -1,0 +1,59 @@
+.container {
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.home-button {
+  width: 260px;
+  height: 160px;
+  border-radius: 15px;
+  background-color: #333;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.home-button:hover {
+  background-color: #555;
+  transform: translateY(-5px);
+}
+.signup-container {
+    text-align: center;
+}
+.signup-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #28a745; /* 녹색 계열 */
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.signup-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}

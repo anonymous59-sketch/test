@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>게시판</title>
+  <link rel="stylesheet" href="/css/menu.css">
+  <link rel="stylesheet" href="css/board_list.css">
+</head>
+
+<body>
+<nav class="nav">
+    <ul class="menu-left">
+        <li><a href="/index.html">홈</a></li>
+        <li><a href="/board_list.html">게시판</a></li>
+        <li><a href="/user_table.html">회원관리</a></li>
+    </ul>
+
+    <ul class="menu-right">
+        <li><a href="/signup.html">회원가입</a></li>
+    </ul>
+</nav>
+
+  <div class="board-wrapper">
+    <h1 class="board-title">게시판</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>게시판 번호</th>
+          <th>게시판 제목</th>
+          <th>게시글 내용</th>
+          <th>작성일자</th>
+        </tr>
+      </thead>
+      <tbody id="boardList">
+        <!-- <tr>
+          <td>1</td>
+          <td>첫 번째 게시글</td>
+          <td class="content">게시판 예시 내용입니다.</td>
+          <td>2026-01-09</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>공지사항</td>
+          <td class="content">게시판 공지 내용입니다.</td>
+          <td>2026-01-08</td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+  <script src="/js/board_list.js"></script>
+</body>
+</html>

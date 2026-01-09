@@ -15,7 +15,7 @@ fetch('./usertable')
 })
 .then(result => {
   result.forEach(elem => {
-    console.log(elem);
+    // console.log(elem);
     const insertHtml = `
       <tr>
         <td>${elem['USER_NO']}</td>
@@ -28,4 +28,7 @@ fetch('./usertable')
     const subject = document.querySelector('#userTable');
     subject.insertAdjacentHTML('beforeend', insertHtml);
   })
+})
+.catch (err => {
+  console.log(err);
 })

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>회원 관리</title>
+  <link rel="stylesheet" href="/css/user_table.css">
+  <link rel="stylesheet" href="/css/menu.css">
+</head>
+
+<body>
+  <nav class="nav">
+    <ul class="menu-left">
+      <li><a href="/index.html">홈</a></li>
+      <li><a href="/board_list.html">게시판</a></li>
+      <li><a href="/user_table.html">회원관리</a></li>
+    </ul>
+    <ul class="menu-right">
+      <li><a href="/signup.html">회원가입</a></li>
+    </ul>
+  </nav>
+  <div class="member-wrapper">
+    <h1 class="member-title">회원 관리</h1>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="회원 아이디 또는 이름 검색" />
+      <!-- onkeyup="searchMember()" 검색기능 넣는거는 나중에 생각 -->
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>회원번호</th>
+          <th>회원 아이디</th>
+          <th>회원 비밀번호</th>
+          <th>회원 이름</th>
+          <th>회원 전화번호</th>
+        </tr>
+      </thead>
+      <tbody id="userTable">
+      </tbody>
+    </table>
+  </div>
+  <script src="/js/user_table.js"></script>
+</body>
+
+</html>

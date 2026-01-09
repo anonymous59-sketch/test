@@ -1,0 +1,37 @@
+.member-wrapper {
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto; 
+}
+
+.member-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.search-box {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.search-box input {
+    padding: 8px;
+    width: 250px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #f5f5f5;
+}
