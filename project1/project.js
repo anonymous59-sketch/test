@@ -67,7 +67,7 @@ project.post('/add_list', async(req, res) => {
     await connection.commit();
     console.log('성공 add_list')
     const result = await connection.execute(`SELECT * FROM board_list ORDER BY 1`)
-    console.log(result);
+    // console.log(result);
     res.send(result.rows);
   } catch (err) {
     console.log(err);
