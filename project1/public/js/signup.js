@@ -2,12 +2,6 @@
 const form = document.getElementById('signupForm');
 
 form.addEventListener('submit', (e) => {
-  // 현재 날짜
-  // const today = new Date();
-  // const yyyy = today.getFullYear();
-  // const mm = String(today.getMonth() + 1).padStart(2, '0');
-  // const dd = String(today.getDate()).padStart(2, '0');
-  // const user_createdate = `${yyyy}-${mm}-${dd}`;
   e.preventDefault();
   const user_id = document.querySelector('#userId').value;
   const user_pw = document.querySelector('#password').value;
