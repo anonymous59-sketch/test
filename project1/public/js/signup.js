@@ -38,10 +38,16 @@ form.addEventListener('submit', (e) => {
     body: JSON.stringify(data),
   })
   .then(data => {
+    // console.log(data);
     return data.json();
   })
   .then(result => {
-    window.location.href = 'index.html';
+    // console.log(result);
+    alert(`반갑습니다 ${result.user_name}님`)
+    window.location.href = '/index.html';
+  })
+  .catch(err => {
+    console.log(err);
   })
 });
 

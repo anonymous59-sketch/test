@@ -12,7 +12,7 @@ CREATE TABLE usertable (
 SELECT *
 FROM usertable
 ORDER BY 1;
-
+ALTER TABLE usertable ADD user_createdate date;
 desc usertable;
 
 DELETE FROM usertable;
@@ -35,8 +35,10 @@ CREATE TABLE board_list(
 ALTER TABLE board_list MODIFY list_content VARCHAR2(1000) NOT NULL;
 
 SELECT *
-FROM board_list;
+FROM board_list
+ORDER BY 1;
 DESC board_list;
+SELECT * FROM board_list WHERE LOWER(list_title) LIKE '%1%';
 
 DELETE FROM board_list;
 
@@ -46,4 +48,4 @@ CREATE SEQUENCE board_seq;
 INSERT INTO board_list (list_no, list_title, list_content, writer)
 VALUES (board_seq.nextval, '11111', '22222222222', '');
 
-ALTER TABLE board_list modify writer varchar2(30) DEFAULT ON NULL '익명';
+ALTER TABLE board_list ADD writer varchar2(30) DEFAULT ON NULL '익명';
