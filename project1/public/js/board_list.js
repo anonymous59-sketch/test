@@ -117,3 +117,51 @@ document.querySelector('.search-form').addEventListener('submit', e => {
     console.log(err);
   })
 })
+
+ /* async function toggleDetail(postId, rowElement) {
+  // 1. 이미 열려있는 상세 창이 있다면 닫기
+  const existingDetail = document.getElementById(`detail-${postId}`);
+  if (existingDetail) {
+      existingDetail.remove();
+      rowElement.classList.remove('selected');
+      return; // 토글 기능: 다시 클릭하면 닫히고 종료
+  }
+
+  // (선택사항) 다른 열려있는 상세창들을 모두 닫고 싶다면 아래 주석 해제
+  // document.querySelectorAll('.detail-row').forEach(row => row.remove());
+
+  try {
+      // 2. DB에서 데이터 불러오기 (Node.js API 호출)
+      const response = await fetch(`/api/board/${postId}`);
+      const post = await response.json();
+
+      // 3. 삽입할 HTML 문자열 생성 (템플릿 리터럴)
+      const detailHtml = `
+          <tr id="detail-${postId}" class="detail-row">
+              <td colspan="4"> <!-- 테이블 전체 칸을 차지하도록 colspan 설정 -->
+                  <div class="detail-container">
+                      <div class="detail-header">
+                          <h2 class="detail-title">${post.TITLE}</h2>
+                          <div class="detail-meta">
+                              <span>작성자: <strong>${post.WRITER}</strong></span> |
+                              <span>작성일: ${new Date(post.REG_DATE).toLocaleString()}</span>
+                          </div>
+                      </div>
+                      <div class="detail-content">
+                          ${post.CONTENT}
+                      </div>
+                  </div>
+              </td>
+          </tr>
+      `;
+
+      // 4. 클릭한 행(rowElement) 바로 다음에 HTML 삽입
+      rowElement.insertAdjacentHTML('afterend', detailHtml);
+
+      // 5. 클릭된 행 디자인 변경
+      rowElement.classList.add('selected');
+
+  } catch (error) {
+      console.error('상세 내용 로드 실패:', error);
+      alert('내용을 불러올 수 없습니다.');
+  } */

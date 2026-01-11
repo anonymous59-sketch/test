@@ -1,0 +1,42 @@
+.detail-row {
+    background-color: #f9f9f9;
+}
+
+.detail-container {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 10px;
+    text-align: left; 
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.detail-title {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #333;
+}
+
+.detail-meta {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.detail-content {
+    line-height: 1.6;
+    min-height: 100px;
+    white-space: pre-wrap; 
+    word-break: break-all;
+}
+
+tr.selected {
+    background-color: #eef2ff;
+    font-weight: bold;
+}
