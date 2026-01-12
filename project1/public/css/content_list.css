@@ -31,9 +31,12 @@
 
 .detail-content {
     line-height: 1.6;
-    min-height: 100px;
+    height: 5em;
     white-space: pre-wrap; 
+    padding-left: 20px;
     word-break: break-all;
+    overflow: auto;
+    border: 1px grey solid;
 }
 
 tr.selected {

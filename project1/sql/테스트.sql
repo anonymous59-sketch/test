@@ -37,6 +37,12 @@ ALTER TABLE board_list MODIFY list_content VARCHAR2(1000) NOT NULL;
 SELECT *
 FROM board_list
 ORDER BY 1;
+
+SELECT *
+FROM board_list
+WHERE writer = '익명'
+ORDER BY 1 DESC;
+
 DESC board_list;
 SELECT * FROM board_list WHERE LOWER(list_title) LIKE '%1%';
 
@@ -49,3 +55,7 @@ INSERT INTO board_list (list_no, list_title, list_content, writer)
 VALUES (board_seq.nextval, '11111', '22222222222', '');
 
 ALTER TABLE board_list ADD writer varchar2(30) DEFAULT ON NULL '익명';
+
+SELECT *
+FROM board_list
+WHERE list_no = 1;

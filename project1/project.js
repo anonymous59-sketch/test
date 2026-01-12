@@ -18,7 +18,7 @@ project.get('/usertable', async(req, res) => {
   try {
     const connection = await db.getConnection();
     const result = await connection.execute(qry);
-    console.log('성공 usertable');
+    // console.log('성공 usertable');
     res.send(result.rows);
   } catch(err) {
     console.log(err);
@@ -33,7 +33,7 @@ project.get('/boardlist', async(req, res) => {
   try {
     const connection = await db.getConnection();
     const result = await connection.execute(qry);
-    console.log('성공 boardlist');
+    // console.log('성공 boardlist');
     res.send(result.rows);
   } catch (err) {
     console.log(err);
@@ -52,7 +52,7 @@ project.post('/add_list', async(req, res) => {
     const connection = await db.getConnection();
     await connection.execute(qry, [title, content, writer])
     await connection.commit();
-    console.log('성공 add_list')
+    // console.log('성공 add_list')
     const result = await connection.execute(`SELECT * FROM board_list ORDER BY 1`)
     // console.log(result);
     res.send(result.rows);
@@ -60,13 +60,13 @@ project.post('/add_list', async(req, res) => {
     console.log(err);
     res.send(`실패 add_list`);
   }
-})
+});
 
 // 게시판 검색
 project.get('/search_list/:search_type/:search', async(req, res) => {
   const search_type = req.params.search_type;
   const search_value = req.params.search;
-  console.log(search_type, search_value);
+  // console.log(search_type, search_value);
   const search = `%${search_value.trim().toLowerCase()}%`;
   
   let qry = '';
@@ -75,7 +75,7 @@ project.get('/search_list/:search_type/:search', async(req, res) => {
   } else {
     // column명은 바인드를 할 수 없다
     let searchCol = `${search_type}`;
-    console.log(searchCol);
+    // console.log(searchCol);
     qry = `SELECT * FROM board_list WHERE LOWER(${searchCol}) LIKE :search ORDER BY 1`
   }
   // console.log(qry);
@@ -88,6 +88,23 @@ project.get('/search_list/:search_type/:search', async(req, res) => {
   } catch (err) {
     console.log(err);
     res.send(`실패 searchlist`);
+  }
+});
+
+// 게시판 내용 불러오기
+project.get('/content/:list_no', async(req, res) => {
+  const list_no = req.params.list_no;
+  console.log(list_no);
+  const qry = `SELECT * FROM board_list WHERE list_no = :list_no`;
+  try {
+    const connection = await db.getConnection();
+    const result = await connection.execute(qry, {list_no});
+    // console.log('성공 content');
+    // console.log(result.rows);
+    res.json(result.rows);
+  } catch(err) {
+    console.log(err);
+    res.send('실패 content');
   }
 })
 
@@ -104,13 +121,13 @@ project.post('/add_user', async(req, res) => {
       user_id, user_pw, user_name, user_tel, user_createdate: new Date(user_createdate)
     })
     connection.commit();
-    console.log('성공 signup')
+    // console.log('성공 signup')
     res.json({user_id, user_pw, user_name, user_tel, user_createdate});
   } catch (err) {
     console.log(err);
     res.send(`실패 add_user`);
   }
-})
+});
 
 // 회원 정렬
 project.get('/order_user/:order', async(req, res) => {
@@ -134,9 +151,39 @@ project.get('/order_user/:order', async(req, res) => {
   try{
     const connection = await db.getConnection();
     const result = await connection.execute(qry);
+    console.log(`성공 order_user`);
     res.send(result.rows);
   } catch(err) {
     console.log(err);
     res.send(`실패 order_user`);
+  }
+});
+
+//// 로그인 페이지
+// 로그인
+project.post('/login', async(req, res) => {
+  const {user_id, user_pw} = req.body;
+  const qry = `SELECT * FROM usertable WHERE user_id = :user_id` 
+  const qry2 = `SELECT * FROM usertable WHERE user_id = :user_id AND user_pw = :user_pw`
+
+  try{
+    const connection = await db.getConnection();
+    const result = await connection.execute(qry, {user_id});
+    console.log('성공 login');
+    // console.log(result.rows);
+    if (result.rows.length == 0){
+      // console.log('확인');
+      res.json('아이디없음');
+      return;
+    }
+    const result2 = await connection.execute(qry2, {user_id, user_pw})
+    // console.log(result2.rows);
+    if (result2.rows.length == 0){
+      res.json('비밀번호문제');
+      return;
+    }
+    res.json(result2);
+  } catch(err) {
+    console.log('실패 login', err);
   }
 })
