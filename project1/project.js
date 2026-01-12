@@ -132,7 +132,7 @@ project.post('/add_user', async(req, res) => {
 // 회원 정렬
 project.get('/order_user/:order', async(req, res) => {
   const order = req.params.order;
-  console.log(order);
+  // console.log(order);
   let order_value = 0;
   switch (order) {
     case '회원번호순':
@@ -164,8 +164,7 @@ project.get('/order_user/:order', async(req, res) => {
 project.post('/login', async(req, res) => {
   const {user_id, user_pw} = req.body;
   const qry = `SELECT * FROM usertable WHERE user_id = :user_id` 
-  const qry2 = `SELECT * FROM usertable WHERE user_id = :user_id AND user_pw = :user_pw`
-
+  
   try{
     const connection = await db.getConnection();
     const result = await connection.execute(qry, {user_id});
@@ -176,14 +175,53 @@ project.post('/login', async(req, res) => {
       res.json('아이디없음');
       return;
     }
+    
+    const qry2 = `SELECT * FROM usertable WHERE user_id = :user_id AND user_pw = :user_pw`
     const result2 = await connection.execute(qry2, {user_id, user_pw})
     // console.log(result2.rows);
     if (result2.rows.length == 0){
       res.json('비밀번호문제');
       return;
     }
+    // console.log(result2.rows[0]);
+    const {USER_NO, USER_ID, USER_PW, USER_NAME, USER_TEL, USER_CREATEDATE}
+    = result2.rows[0];
+    console.log(USER_NO, USER_ID);
+    // console.log(USER_NO, USER_ID, USER_PW, USER_NAME, USER_TEL, USER_CREATEDATE);
+    const qry3 = `INSERT INTO login VALUES ('${USER_NO}', '${USER_ID}', '${USER_PW}', '${USER_NAME}')`
+    await connection.execute(qry3);
+    await connection.commit();
     res.json(result2);
   } catch(err) {
     console.log('실패 login', err);
+  }
+});
+
+project.get('/loginGet', async(req, res) => {
+  const qry = `SELECT * FROM login`
+  try {
+    const connection = await db.getConnection();
+    const result = await connection.execute(qry);
+    console.log('login 성공');
+    // console.log(result.rows);
+    res.json(result.rows);
+  } catch (err) {
+    console.log('login 실패');
+    console.log(err);
+  }
+})
+
+project.get('/logout', async(req, res) => {
+  const qry = `DELETE FROM login`
+  try {
+    const connection = await db.getConnection();
+    const result = await connection.execute(qry);
+    console.log('logout 성공');
+    await connection.commit();
+    // console.log(result.rows);
+    res.redirect('/')
+  } catch(err) {
+    console.log('logout 실패');
+    console.log(err);
   }
 })

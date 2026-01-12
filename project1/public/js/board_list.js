@@ -12,6 +12,34 @@ function trucText (text){
   return text;
 } // end of trucText fnc.
 
+let userId = '';
+async function init () {
+	await fetch('/loginGet')
+	.then(res => {
+		return res.json();
+	})
+	.then(result => {
+		if (result.length != 0) {
+			userId = result[0].USER_ID;
+			// console.log(userId);
+			renderPage(userId);
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	})
+}
+
+function renderPage(userId) {
+  const li1 = document.querySelector('.menu-right li:first-child'); 
+  const li2 = document.querySelector('.menu-right li:last-child'); 
+  li1.innerHTML = '';
+  li2.innerHTML = '';
+  li1.innerHTML = `<a>${userId}</a>`;
+  li2.innerHTML = `<a href='/logout'>로그아웃</a>`
+}
+init();
+
 // 목록 그리기 함수
 function drawList(result) {
     const subject = document.querySelector('#boardList');
@@ -229,7 +257,7 @@ pageNum.addEventListener('click', e => {
     const number = e.target.dataset.pno;
     // console.log(number);
     maxList = document.querySelector('#pageSizeSelect').value;
-    console.log(maxList);
+    // console.log(maxList);
     let pageData = paging(arrayData, number, maxList);
     drawList(pageData);
     // console.log(e.target);

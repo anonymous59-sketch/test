@@ -1,3 +1,21 @@
+let userId = '';
+fetch('/loginGet')
+.then(res => {
+  return res.json();
+})
+.then(result => {
+  if (result.length != 0) {
+    userId = result[0].USER_ID;
+    // console.log(userId);
+    alert(`환영합니다. ${userId}님`)
+    window.location.href = '/index.html';
+  }
+})
+.catch(err => {
+  console.log(err);
+})
+
+
 document.querySelector('.login-box').addEventListener('submit', e => {
   e.preventDefault();
   const user_id = document.querySelector('#userId').value;
@@ -30,10 +48,12 @@ document.querySelector('.login-box').addEventListener('submit', e => {
     // console.log(result);
     if (result == '아이디없음') {
       alert('해당 아이디는 가입되어있지 않습니다.');
+      return;
     } else if (result == '비밀번호문제') {
       alert('비밀번호를 다시 확인해주세요');
+      return;
     }
-    
+    window.location.href = '/index.html';
   })
   .catch(err => {
     console.log(err);

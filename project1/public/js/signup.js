@@ -37,8 +37,8 @@ form.addEventListener('submit', (e) => {
   })
   .then(result => {
     // console.log(result);
-    alert(`반갑습니다 ${result.user_name}님`)
-    window.location.href = '/index.html';
+    alert(`회원가입이 되었습니다 \n로그인 페이지로 이동합니다`)
+    window.location.href = '/login.html';
   })
   .catch(err => {
     console.log(err);

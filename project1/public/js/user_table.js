@@ -16,13 +16,42 @@ function drawList(result) {
   })
 }
 
+
+let userId = '';
+async function init () {
+	await fetch('/loginGet')
+	.then(res => {
+		return res.json();
+	})
+	.then(result => {
+		if (result.length != 0) {
+			userId = result[0].USER_ID;
+			// console.log(userId);
+			renderPage(userId);
+		}
+	})
+	.catch(err => {
+		console.log(err);
+	})
+}
+
+function renderPage(userId) {
+  const li1 = document.querySelector('.menu-right li:first-child'); 
+  const li2 = document.querySelector('.menu-right li:last-child'); 
+  li1.innerHTML = '';
+  li2.innerHTML = '';
+  li1.innerHTML = `<a>${userId}</a>`;
+  li2.innerHTML = `<a href='/logout'>로그아웃</a>`
+}
+init();
+
 // usertable 값을 데이터베이스에서 반환 받아서 이용
 fetch('./usertable')
 .then(resp => {
   return resp.json();
 })
 .then(result => {
-  console.log(result)
+  // console.log(result)
   drawList(result);
 })
 .catch (err => {
@@ -48,7 +77,7 @@ document.querySelector('.sort-container').addEventListener('click', e => {
       return res.json();
     })
     .then(result => {
-      console.log(result);
+      // console.log(result);
       drawList(result);
     })
     .catch(err => {
