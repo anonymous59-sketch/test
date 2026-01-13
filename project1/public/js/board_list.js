@@ -121,7 +121,6 @@ function pageNumber(data, maxRow = 5){
     page.setAttribute('data-pno', i);
     numPgContainer.appendChild(page);
   }
-
 }
 
 //// 전역 fetch 기능
@@ -199,6 +198,7 @@ document.querySelector('#submitPostBtn').addEventListener('click', e => {
 
 // 글쓰기 취소버튼 이벤트
 document.querySelector('#cancelPostBtn').addEventListener('click', e => {
+  document.querySelector('#writeArea').style.display = 'none'
   document.querySelectorAll('.write-form input').forEach(elem => elem.value = '');
   document.querySelector('#postContent').value = '';
 });
