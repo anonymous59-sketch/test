@@ -12,30 +12,31 @@ function trucText (text){
   return text;
 } // end of trucText fnc.
 
-let userId = '';
-async function init () {
-	await fetch('/loginGet')
+// 세션 불러오고 정보 유지 함수
+function init () {
+  fetch('/loginGet')
 	.then(res => {
 		return res.json();
 	})
 	.then(result => {
 		if (result.length != 0) {
-			userId = result[0].USER_ID;
+			let userId = result[0].USER_ID;
+      let auth = result[0].AUTH;
 			// console.log(userId);
-			renderPage(userId);
+			renderPage(userId, auth);
 		}
 	})
 	.catch(err => {
 		console.log(err);
 	})
 }
-
-function renderPage(userId) {
+// 불러온 로그인 세션 기반 웹페이지 그리기 함수
+function renderPage(userId, auth) {
   const li1 = document.querySelector('.menu-right li:first-child'); 
   const li2 = document.querySelector('.menu-right li:last-child'); 
   li1.innerHTML = '';
   li2.innerHTML = '';
-  li1.innerHTML = `<a>${userId}</a>`;
+  li1.innerHTML = `<a>${userId}(${auth})</a>`;
   li2.innerHTML = `<a href='/logout'>로그아웃</a>`
 }
 init();
@@ -63,7 +64,6 @@ function drawList(result) {
 // 글 내용 그리기 함수
 function drawContent(result, row){
   // data-bno == bno 밑에 그려야함
-  // console.log(row);
   const listNo = row.dataset.bno;
   const selectRow = document.querySelector(`#detail-${listNo}`);
   
@@ -113,7 +113,6 @@ function pageNumber(data, maxRow = 5){
   const pageMaxNum = Math.ceil(data.length / maxRow);
   let numPgContainer = document.querySelector('#numPg');
   numPgContainer.innerHTML = '';
-  // console.log(pageMaxNum);
   for(let i = 1; i <= pageMaxNum; i++) {
     let page = document.createElement('span');
     let pageNo = `${i} `;
@@ -166,7 +165,6 @@ document.querySelector('#submitPostBtn').addEventListener('click', e => {
     content,
     writer
   };
-  // console.log(data);
 
   // 데이터 베이스 값 받아와서 목록에 그리기
   fetch('add_list', {
@@ -199,7 +197,7 @@ document.querySelector('#submitPostBtn').addEventListener('click', e => {
   document.querySelector('#postContent').value = '';
 }); // end of writeBtn event
 
-// 글쓰기 취소버튼
+// 글쓰기 취소버튼 이벤트
 document.querySelector('#cancelPostBtn').addEventListener('click', e => {
   document.querySelectorAll('.write-form input').forEach(elem => elem.value = '');
   document.querySelector('#postContent').value = '';
@@ -210,14 +208,16 @@ document.querySelector('.search-form').addEventListener('submit', e => {
   e.preventDefault();
   const search_type = document.querySelector('.search-select').value;
   const search = document.querySelector('.search-input').value;
-  // console.log(search_type, search);
+  if (!search) {
+    window.location.href = '/board_list.html';
+    return;
+  }
   fetch(`/search_list/${search_type}/${search}`)
   .then(res => {
     return res.json();
   })
   .then(result => {
     arrayData = result;
-    // console.log(result);
     maxList = document.querySelector('#pageSizeSelect').value;
     pageNumber(result, maxList);
     let pageData = paging(result, undefined, maxList);
@@ -231,18 +231,13 @@ document.querySelector('.search-form').addEventListener('submit', e => {
 // 글 목록 클릭 이벤트
 document.querySelector('#boardList').addEventListener('click', e => {
   let event = e.target.parentElement;
-  // console.log(event.dataset.bno);
-  // console.log(event.id);
-  // console.log(event);
   let bno = event.dataset.bno;
-  // let row = event;
   if (event.id == 'boardRow')
   fetch(`/content/${bno}`)
   .then(res => {
     return res.json();
   })
   .then(result => {
-    // console.log(result);
     drawContent(result, event);
   })
   .catch(err => {
@@ -250,23 +245,22 @@ document.querySelector('#boardList').addEventListener('click', e => {
   })
 });
 
+// 페이지 숫자를 클릭 이벤트, 새로 그리기
 let pageNum = document.querySelector('#numPg')
 pageNum.addEventListener('click', e => {
   document.querySelectorAll('.pageNo').forEach(elem => elem.classList.remove('selectedSpan'))
   if (e.target.classList.contains('pageNo')) {
     const number = e.target.dataset.pno;
-    // console.log(number);
     maxList = document.querySelector('#pageSizeSelect').value;
-    // console.log(maxList);
     let pageData = paging(arrayData, number, maxList);
+    // paging(데이터, 현재페이지, 한 페이지당 목록 수)
     drawList(pageData);
-    // console.log(e.target);
     e.target.classList.add('selectedSpan')
   } 
 });
 
+// 한 화면에 나올 목록 수 변경 시 이벤트
 document.querySelector('#pageSizeSelect').addEventListener('change', e => {
-  // console.log(e.target.value);
   const listNumber = e.target.value;
   const number = pageNum.dataset.pno;
   pageNumber(arrayData, listNumber);

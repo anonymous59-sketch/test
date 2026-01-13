@@ -1,11 +1,11 @@
-let userId = '';
+// 로그인 후 로그인 세션에 값 넣어두기
 fetch('/loginGet')
 .then(res => {
   return res.json();
 })
 .then(result => {
   if (result.length != 0) {
-    userId = result[0].USER_ID;
+    let userId = result[0].USER_ID;
     // console.log(userId);
     alert(`환영합니다. ${userId}님`)
     window.location.href = '/index.html';
@@ -13,9 +13,9 @@ fetch('/loginGet')
 })
 .catch(err => {
   console.log(err);
-})
+});
 
-
+// 로그인을 했을 때 로그인 정보를 화원관리 정보와 비교하기
 document.querySelector('.login-box').addEventListener('submit', e => {
   e.preventDefault();
   const user_id = document.querySelector('#userId').value;
@@ -58,4 +58,4 @@ document.querySelector('.login-box').addEventListener('submit', e => {
   .catch(err => {
     console.log(err);
   })
-})
+});

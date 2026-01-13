@@ -32,11 +32,14 @@ form.addEventListener('submit', (e) => {
     body: JSON.stringify(data),
   })
   .then(data => {
-    // console.log(data);
     return data.json();
   })
   .then(result => {
-    // console.log(result);
+    if(result == '아이디중복'){
+      alert('해당 아이디가 이미 사용 중입니다 다른 아이디로 시도하십시오')
+      document.querySelector('#userId') .focus();
+      return;
+    }
     alert(`회원가입이 되었습니다 \n로그인 페이지로 이동합니다`)
     window.location.href = '/login.html';
   })

@@ -24,7 +24,9 @@ CREATE SEQUENCE user_seq;
 --VALUES (1, 'test1', 'testPw', 'testName', '000-1111-2222');
 
 ALTER TABLE usertable MODIFY user_tel varchar2(15);
-ALTER TABLE usertable MODIFY auth varchar2(10) DEFAULT 'member';
+ALTER TABLE usertable ADD auth varchar2(10) DEFAULT 'member';
+UPDATE usertable
+SET auth = 'admin';
 
 CREATE TABLE board_list(
   list_no NUMBER PRIMARY KEY,
@@ -70,9 +72,8 @@ WHERE 1=2;
 SELECT *
 FROM login;
 
-INSERT INTO login
-VALUES ('1', '121', '222', '232');
 ALTER TABLE login DROP COLUMN user_createdate;
 ALTER TABLE login DROP COLUMN user_tel;
+ALTER TABLE login ADD auth varchar2(10) NOT NULL;
 
 DELETE FROM login;

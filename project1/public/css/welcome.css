@@ -1,0 +1,19 @@
+.welcome-user {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1;
+
+  white-space: nowrap;
+  user-select: none;
+
+  /* 배경/텍스트 자동 대응 */
+  background-color: rgba(0, 0, 0, 0.08);
+  color: #222;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
