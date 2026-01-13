@@ -13,6 +13,7 @@ SELECT *
 FROM usertable
 ORDER BY 1;
 ALTER TABLE usertable ADD user_createdate date;
+ALTER TABLE usertable MODIFY user_id UNIQUE;
 desc usertable;
 
 DELETE FROM usertable;
